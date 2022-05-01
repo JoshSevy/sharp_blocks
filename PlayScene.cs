@@ -8,7 +8,7 @@ namespace Blocks
 {
     public class PlayScene
     {
-        private Engine engine;
+        private Engine engine = new();
         private double baseDelay;
         private double curDelay;
         private double elapsed;
@@ -38,6 +38,14 @@ namespace Blocks
             input.Handle(Keys.Right, () =>
             {
                 engine.Right();
+            });
+            input.Handle(Keys.Up, () =>
+            {
+                engine.Rotate();
+            });
+            input.Handle(Keys.Space, () =>
+            {
+                curDelay = FAST_DELAY;
             });
             engine.Spawn();
             engine.GameOver = () =>
@@ -73,7 +81,7 @@ namespace Blocks
             }
         }
 
-        public void Update(double dt)
+        public void Update(double dt = 0)
         {
             input.Update(dt);
             elapsed += dt;

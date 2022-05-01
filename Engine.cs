@@ -12,6 +12,12 @@ namespace Blocks
         private Arr curPiece;
         private readonly Random rnd = new();
 
+        private Action dropped = () => { };
+        public Action Dropped
+        {
+            set => dropped = value;
+        }
+
         public Arr Board
         {
             get => board;
@@ -43,7 +49,8 @@ namespace Blocks
             }
             else
             {
-                gameOver();
+                dropped();
+                Spawn();
             }
         }
 
@@ -66,6 +73,19 @@ namespace Blocks
             if (clone.CanPlace(curPiece, curRow, curCol - 1))
             {
                 curCol--;
+                clone.Place(curPiece, curRow, curCol);
+                board = clone;
+            }
+        }
+
+        public void Rotate()
+        {
+            var clone = board.Cloned;
+            var rotated = curPiece.RotatedCounterClockwise;
+            clone.Remove(curPiece, curRow, curCol);
+            if (clone.CanPlace(rotated, curRow, curCol))
+            {
+                curPiece = rotated;
                 clone.Place(curPiece, curRow, curCol);
                 board = clone;
             }

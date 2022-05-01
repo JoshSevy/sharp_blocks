@@ -7,6 +7,14 @@
 
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
+    <PackageReference Include="FontStashSharp.MonoGame" Version="1.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="FontStashSharp.MonoGame" />
+    <None Remove="assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="assets\" />
+  </ItemGroup>
 </Project>

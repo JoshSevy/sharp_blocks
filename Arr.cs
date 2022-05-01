@@ -97,6 +97,43 @@ namespace Blocks
             }
 
         }
-    }
 
+        public Arr RotatedClockwise
+        {
+            get
+            {
+                var dst = new Arr(cols, rows);
+                for (int r = 0; r < rows; r++)
+                {
+                    for (int c = 0; c < cols; c++)
+                    {
+                        int v = this[r, c];
+                        int dr = c;
+                        int dc = rows - 1 - r;
+                        dst[dr, dc] = v;
+                    }
+                }
+                return dst;
+            }
+        }
+
+        public Arr RotatedCounterClockwise
+        {
+            get
+            {
+                var dst = new Arr(cols, rows);
+                for (int r = 0; r < rows; r++)
+                {
+                    for (int c = 0; c < cols; c++)
+                    {
+                        int v = this[r, c];
+                        int dr = cols - 1 - c;
+                        int dc = r;
+                        dst[dr, dc] = v;
+                    }
+                }
+                return dst;
+            }
+        }
+    }
 }

@@ -14,7 +14,7 @@
         "outputPath": "/Users/joshuasevy/Projects/csharp_game/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/joshuasevy/.nuget/NuGet/NuGet.Config"
+          "/Users/joshuasevy/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -38,6 +38,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "FontStashSharp.MonoGame": {
+              "target": "Package",
+              "version": "[1.0.4, )"
+            },
             "MonoGame.Framework.DesktopGL": {
               "target": "Package",
               "version": "[3.8.0.1641, )"
