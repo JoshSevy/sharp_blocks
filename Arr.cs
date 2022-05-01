@@ -36,5 +36,52 @@ namespace Blocks
             buf = new int[this.rows * cols];
             source.CopyTo(buf, 0);
         }
+
+        public bool CanPlace(Arr piece, int r, int c)
+        {
+            for (int y = 0; y < piece.Rows; y++)
+            {
+                for (int x = 0; x < piece.Cols; x++)
+                {
+                    int p = piece[y, x];
+                    if (p == 0)
+                    {
+                        continue;
+                    }
+                    int br = r + y;
+                    int bc = c + x;
+                    if (br < 0 || bc >= rows)
+                    {
+                        return false;
+                    }
+                    if (this[br, bc] != 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        public void Place(Arr piece, int r, int c)
+        {
+            for (int y = 0; y < piece.Rows; y++)
+            {
+                for (int x = 0; x < piece.Cols; x++)
+                {
+                    int p = piece[y, x];
+                    if (p != 0)
+                    {
+                        this[r + y, c + x] = p;
+                    }
+                }
+            }
+        }
+
+        public Arr Cloned
+        {
+            get => new(buf, rows);
+        }
     }
+
 }
