@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using FontStashSharp;
 using Microsoft.Xna.Framework;
@@ -15,7 +14,7 @@ namespace Blocks
         private Texture2D  pixel;
         private SpriteBatch spriteBatch;
         private readonly FontSystem fontSystem = new();
-        private SpriteFont font18;
+        private SpriteFontBase font18;
         private SceneManager sceneManager;
         private RenderTarget2D target;
         private double? clock;
@@ -30,7 +29,7 @@ namespace Blocks
             get => pixel;
         }
 
-        public SpriteFont Font18
+        public SpriteFontBase Font18
         {
             get => font18;
         }
@@ -105,7 +104,7 @@ namespace Blocks
 
         protected override void LoadContent()
         {
-            fontSystem.AddFont(File.ReadAllBytes("assets/FSEX300.ttf"));
+            fontSystem.AddFont(File.ReadAllBytes(path: "assets/FSEX300.ttf"));
             font18 = fontSystem.GetFont(18);
         }
 

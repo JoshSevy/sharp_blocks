@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
@@ -58,7 +57,7 @@ namespace Blocks
             };
             engine.GameOver = () =>
             {
-                sceneManager.SwitchScene("gameover", new GameSummary(score, level));
+                sceneManager.SwithScene("gameOver", new GameSummary(score, level));
             };
             engine.LinesRemoved = UpdateScore;
             engine.Down();
