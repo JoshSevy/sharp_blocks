@@ -53,7 +53,7 @@ namespace Blocks
             graphics.GraphicsDevice.SetRenderTarget(target);
             GraphicsDevice.Clear(Color.DimGray);
             spriteBatch.Begin();
-            scene.Render(spriteBatch);
+            sceneManager.Render(spriteBatch);
             spriteBatch.End();
             graphics.GraphicsDevice.SetRenderTargets(null);
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque);
@@ -71,7 +71,7 @@ namespace Blocks
             {
                 var updated = gameTime.ElapsedGameTime.TotalSeconds;
                 var dt = updated - clock.Value;
-                scene.Update(dt);
+                sceneManager.Update(dt);
             }
             else
             {

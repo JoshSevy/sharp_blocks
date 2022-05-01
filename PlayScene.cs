@@ -16,7 +16,7 @@ namespace Blocks
         int score;
         int level = 1;
         private readonly InputManager input = new();
-        private SceneManage sceneManager;
+        private SceneManager sceneManager;
 
         private readonly Color[] palatte = new Color[]
         {
@@ -145,6 +145,6 @@ namespace Blocks
         public void Leave()
         {
 
-        };
+        }
     }
 }

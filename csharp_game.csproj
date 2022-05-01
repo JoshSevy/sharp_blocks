@@ -13,6 +13,7 @@
   <ItemGroup>
     <None Remove="FontStashSharp.MonoGame" />
     <None Remove="assets\" />
+    <None Remove="FontStashSharp" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\" />
