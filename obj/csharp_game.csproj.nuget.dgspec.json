@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/joshuasevy/Projects/csharp_game/csharp_game.csproj": {}
+  },
+  "projects": {
+    "/Users/joshuasevy/Projects/csharp_game/csharp_game.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/joshuasevy/Projects/csharp_game/csharp_game.csproj",
+        "projectName": "csharp_game",
+        "projectPath": "/Users/joshuasevy/Projects/csharp_game/csharp_game.csproj",
+        "packagesPath": "/Users/joshuasevy/.nuget/packages/",
+        "outputPath": "/Users/joshuasevy/Projects/csharp_game/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/joshuasevy/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "MonoGame.Framework.DesktopGL": {
+              "target": "Package",
+              "version": "[3.8.0.1641, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.407/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

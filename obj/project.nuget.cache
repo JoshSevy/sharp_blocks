@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "nmVB/czldTR+pqYS8P/PE9M4/otORcbZwQ+uEE9M+fPuCd4k9EOnQfU8m7e5QV++AzSG9mDS0T0gvTi60YC9cQ==",
+  "success": true,
+  "projectFilePath": "/Users/joshuasevy/Projects/csharp_game/csharp_game.csproj",
+  "expectedPackageFiles": [
+    "/Users/joshuasevy/.nuget/packages/monogame.framework.desktopgl/3.8.0.1641/monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512"
+  ],
+  "logs": []
+}
