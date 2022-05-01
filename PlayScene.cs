@@ -8,9 +8,23 @@ namespace Blocks
     {
         private Engine engine;
 
+        private readonly Color[] palatte = new Color[]
+        {
+            Color.Black,
+            Color.Cyan,
+            Color.Yellow,
+            Color.Purple,
+            Color.Orange,
+            Color.Blue,
+            Color.Green,
+            Color.Red,
+        };
+
         private void Reset()
         {
             engine = new();
+
+            engine.Spawn();
         }
 
         public void Playscene()
@@ -33,7 +47,8 @@ namespace Blocks
                         CELL,
                         CELL
                         );
-                    spriteBatch.Draw(App.Instance.Pixel, rc, Color.Black);
+                    var v = engine.Board[r, c];
+                    spriteBatch.Draw(App.Instance.Pixel, rc, palatte[v]);
                 }
             }
         }
