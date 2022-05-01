@@ -1,15 +1,16 @@
 ﻿<Properties StartupConfiguration="{85D855D0-CE29-4C5C-B97D-47E692A7976D}|Default">
   <MonoDevelop.Ide.ItemProperties.csharp__game PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="App.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PlayScene.cs">
     <Files>
-      <File FileName="App.cs" Line="4" Column="1" />
+      <File FileName="App.cs" Line="18" Column="41" />
+      <File FileName="PlayScene.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="csharp_game" expanded="True">
             <Node name="csharp_game" expanded="True">
-              <Node name="App.cs" selected="True" />
+              <Node name="PlayScene.cs" selected="True" />
             </Node>
           </Node>
         </State>
