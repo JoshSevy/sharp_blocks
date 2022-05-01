@@ -50,7 +50,11 @@ namespace Blocks
                     }
                     int br = r + y;
                     int bc = c + x;
-                    if (br < 0 || bc >= rows)
+                    if (br < 0 || br >= rows)
+                    {
+                        return false;
+                    }
+                    if (bc < 0 || bc >= cols)
                     {
                         return false;
                     }
@@ -134,6 +138,58 @@ namespace Blocks
                 }
                 return dst;
             }
+        }
+
+        private bool IsRowFull(int row)
+        {
+            for (int c = 0; c < cols; c++)
+            {
+                if (this[row, c] == 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private void ShiftRow(int row)
+        {
+            for (int c = 0; c < cols; c++)
+            {
+                this[row + 1, c] = this[row, c];
+            }
+        }
+
+        private void ClearRow(int row)
+        {
+            for (int c = 0; c < cols; c++)
+            {
+                this[row, c] = 0;
+            }
+        }
+
+        private void RemoveRow(int row)
+        {
+            for (int r = row; r > 0; r--)
+            {
+                ShiftRow(r - 1);
+            }
+            ClearRow(0);
+        }
+
+        public int RemoveFullRows()
+        {
+            int removed = 0;
+            for (int row = rows - 1; row > 0; row--)
+            {
+                if (IsRowFull(row))
+                {
+                    RemoveRow(row);
+                    row++;
+                    removed++;
+                }
+            }
+            return removed;
         }
     }
 }

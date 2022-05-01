@@ -13,9 +13,22 @@ namespace Blocks
         private readonly Random rnd = new();
 
         private Action dropped = () => { };
+        private Action gameOver = () => { };
+        private Action<int> linesRemoved = (rows) => { };
+
+        public Action GameOver
+        {
+            set => gameOver = value;
+        }
+
         public Action Dropped
         {
             set => dropped = value;
+        }
+
+        public Action<int> LinesRemoved
+        {
+            set => linesRemoved = value;
         }
 
         public Arr Board
@@ -29,12 +42,11 @@ namespace Blocks
             curCol = 4;
             curRow = 0;
             curPiece = PIECES[which].Cloned;
-        }
 
-        private Action gameOver = () => { };
-        public Action GameOver
-        {
-            set => gameOver = value;
+            if (!board.CanPlace(curPiece, curRow + 1, curCol))
+            {
+                gameOver();
+            }
         }
 
         public void Down()
@@ -50,6 +62,8 @@ namespace Blocks
             else
             {
                 dropped();
+                var rows = board.RemoveFullRows();
+                linesRemoved(rows);
                 Spawn();
             }
         }

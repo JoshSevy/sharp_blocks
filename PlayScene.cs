@@ -6,13 +6,17 @@ using static Blocks.Constants;
 
 namespace Blocks
 {
-    public class PlayScene
+    public class PlayScene: IScene
     {
         private Engine engine = new();
         private double baseDelay;
         private double curDelay;
         private double elapsed;
+        private double? timeInLevel;
+        int score;
+        int level = 1;
         private readonly InputManager input = new();
+        private SceneManage sceneManager;
 
         private readonly Color[] palatte = new Color[]
         {
@@ -48,10 +52,15 @@ namespace Blocks
                 curDelay = FAST_DELAY;
             });
             engine.Spawn();
+            engine.Dropped = () =>
+            {
+                curDelay = baseDelay;
+            };
             engine.GameOver = () =>
             {
-                Console.WriteLine("Game Over");
+                sceneManager.SwitchScene("gameover", new GameSummary(score, level));
             };
+            engine.LinesRemoved = UpdateScore;
             engine.Down();
         }
 
@@ -79,6 +88,19 @@ namespace Blocks
                     spriteBatch.Draw(App.Instance.Pixel, rc, palatte[v]);
                 }
             }
+            var font = App.Instance.Font18;
+            font.DrawText(
+                spriteBatch,
+                $"Level: {level + 1}",
+                new Vector2(16, 16),
+                Color.White
+                );
+            font.DrawText(
+                spriteBatch,
+                $"Score: {score}",
+                new Vector2(16, 32),
+                Color.White
+                );
         }
 
         public void Update(double dt = 0)
@@ -90,6 +112,39 @@ namespace Blocks
                 elapsed = 0;
                 engine.Down();
             }
+            if (!timeInLevel.HasValue)
+            {
+                timeInLevel = dt;
+            }
+            else
+            {
+                timeInLevel += dt;
+            }
+            if (timeInLevel > LEVEL_SECS)
+            {
+                timeInLevel = null;
+                level++;
+                baseDelay /= SPEED_BUMP;
+            }
         }
+
+        private void UpdateScore(int removed)
+        {
+            var scoreMultiplier = new[] { 0, 40, 100, 300, 1200 };
+            score += scoreMultiplier[removed] * (level + 1);
+        }
+
+        public void Enter(SceneManager manage, object _)
+        {
+            sceneManager = manage;
+            score = 0;
+            level = 0;
+            Reset();
+        }
+
+        public void Leave()
+        {
+
+        };
     }
 }

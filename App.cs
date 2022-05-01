@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Blocks.Constants;
@@ -8,17 +10,60 @@ namespace Blocks
 {
     class App : Game
     {
+        private static App instance;
         private readonly GraphicsDeviceManager graphics;
         private Texture2D  pixel;
+        private SpriteBatch spriteBatch;
+        private readonly FontSystem fontSystem = new();
+        private SpriteFont font18;
+        private SceneManager sceneManager;
         private RenderTarget2D target;
         private double? clock;
+
+        public static App Instance
+        {
+            get => instance;
+        }
 
         public Texture2D Pixel
         {
             get => pixel;
         }
 
-        private SpriteBatch spriteBatch;
+        public SpriteFont Font18
+        {
+            get => font18;
+        }
+
+        public App()
+        {
+            sceneManager = new SceneManager(
+                new Dictionary<string, IScene>
+                {
+                    {"play", new PlayScene()},
+                    {"gameOver", new GameOverScene()}
+                }, "play"
+            );
+            graphics = new GraphicsDeviceManager(this);
+            instance = this;
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            graphics.GraphicsDevice.SetRenderTarget(target);
+            GraphicsDevice.Clear(Color.DimGray);
+            spriteBatch.Begin();
+            scene.Render(spriteBatch);
+            spriteBatch.End();
+            graphics.GraphicsDevice.SetRenderTargets(null);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque);
+            var dst = new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height);
+            spriteBatch.Draw(target, dst, Color.White);
+            spriteBatch.End();
+        }
+
+
+
 
         protected override void Update(GameTime gameTime)
         {
@@ -47,43 +92,21 @@ namespace Blocks
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             target = new RenderTarget2D(
-                GraphicsDevice,
-                VIRTUAL_WIDTH,
-                VIRTUAL_HEIGHT,
-                false,
-                SurfaceFormat.Color,
-                DepthFormat.None, GraphicsDevice.PresentationParameters.MultiSampleCount,
-                RenderTargetUsage.DiscardContents
-                );
+            GraphicsDevice,
+            VIRTUAL_WIDTH,
+            VIRTUAL_HEIGHT,
+            false,
+            SurfaceFormat.Color,
+            DepthFormat.None, GraphicsDevice.PresentationParameters.MultiSampleCount,
+            RenderTargetUsage.DiscardContents
+            );
             
         }
 
-        private static App instance;
-            public static App Instance
+        protected override void LoadContent()
         {
-            get  => instance;
-        }
-
-        public App()
-        {
-            instance = this;
-            graphics = new GraphicsDeviceManager(this);
-        }
-
-        private PlayScene scene = new();
-
-        protected override void Draw(GameTime gameTime)
-        {
-            graphics.GraphicsDevice.SetRenderTarget(target);
-            GraphicsDevice.Clear(Color.DimGray);
-            spriteBatch.Begin();
-            scene.Render(spriteBatch);
-            spriteBatch.End();
-            graphics.GraphicsDevice.SetRenderTargets(null);
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque);
-            var dst = new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height);
-            spriteBatch.Draw(target, dst, Color.White);
-            spriteBatch.End();
+            fontSystem.AddFont(File.ReadAllBytes("assets/FSEX300.ttf"));
+            font18 = fontSystem.GetFont(18);
         }
 
         public static void Main()
