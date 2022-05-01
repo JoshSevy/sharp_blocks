@@ -47,5 +47,29 @@ namespace Blocks
             }
         }
 
+        public void Right()
+        {
+            var clone = board.Cloned;
+            clone.Remove(curPiece, curRow, curCol);
+            if (clone.CanPlace(curPiece, curRow, curCol + 1))
+            {
+                curCol++;
+                clone.Place(curPiece, curRow, curCol);
+                board = clone;
+            }
+        }
+
+        public void Left()
+        {
+            var clone = board.Cloned;
+            clone.Remove(curPiece, curRow, curCol);
+            if (clone.CanPlace(curPiece, curRow, curCol - 1))
+            {
+                curCol--;
+                clone.Place(curPiece, curRow, curCol);
+                board = clone;
+            }
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using static Blocks.Constants;
 
@@ -11,6 +12,7 @@ namespace Blocks
         private double baseDelay;
         private double curDelay;
         private double elapsed;
+        private readonly InputManager input = new();
 
         private readonly Color[] palatte = new Color[]
         {
@@ -29,6 +31,14 @@ namespace Blocks
             baseDelay = NORMAL_DELAY;
             curDelay = baseDelay;
             engine = new();
+            input.Handle(Keys.Left, () =>
+            {
+                engine.Left();
+            });
+            input.Handle(Keys.Right, () =>
+            {
+                engine.Right();
+            });
             engine.Spawn();
             engine.GameOver = () =>
             {
@@ -65,6 +75,7 @@ namespace Blocks
 
         public void Update(double dt)
         {
+            input.Update(dt);
             elapsed += dt;
             if (elapsed >= curDelay)
             {
