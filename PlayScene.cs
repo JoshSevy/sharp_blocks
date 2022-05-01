@@ -36,11 +36,6 @@ namespace Blocks
                     spriteBatch.Draw(App.Instance.Pixel, rc, Color.Black);
                 }
             }
-            spriteBatch.Draw(
-                App.Instance.Pixel,
-                new Rectangle(100, 100, 100, 100),
-                Color.Red
-                );
         }
     }
 }
