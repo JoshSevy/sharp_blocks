@@ -1,6 +1,6 @@
 ﻿<Properties StartupConfiguration="{85D855D0-CE29-4C5C-B97D-47E692A7976D}|Default">
   <MonoDevelop.Ide.ItemProperties.csharp__game PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="IScene.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SceneManager.cs">
     <Files>
       <File FileName="InputManager.cs" Line="33" Column="10" />
       <File FileName="Arr.cs" Line="180" Column="34" />
@@ -9,14 +9,15 @@
       <File FileName="Engine.cs" Line="66" Column="36" />
       <File FileName="Constants.cs" Line="20" Column="47" />
       <File FileName="App.cs" Line="45" Column="25" />
-      <File FileName="IScene.cs" Line="2" Column="11" />
+      <File FileName="IScene.cs" Line="9" Column="29" />
+      <File FileName="SceneManager.cs" Line="2" Column="17" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="csharp_game" expanded="True">
             <Node name="csharp_game" expanded="True">
-              <Node name="IScene.cs" selected="True" />
+              <Node name="SceneManager.cs" selected="True" />
             </Node>
           </Node>
         </State>
