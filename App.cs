@@ -11,6 +11,7 @@ namespace Blocks
         private readonly GraphicsDeviceManager graphics;
         private Texture2D  pixel;
         private RenderTarget2D target;
+        private double? clock;
 
         public Texture2D Pixel
         {
@@ -18,6 +19,20 @@ namespace Blocks
         }
 
         private SpriteBatch spriteBatch;
+
+        protected override void Update(GameTime gameTime)
+        {
+            if (clock.HasValue)
+            {
+                var updated = gameTime.ElapsedGameTime.TotalSeconds;
+                var dt = updated - clock.Value;
+                scene.Update(dt);
+            }
+            else
+            {
+                clock = gameTime.ElapsedGameTime.TotalSeconds;
+            }
+        }
 
         protected override void Initialize()
         {
@@ -75,12 +90,6 @@ namespace Blocks
         {
             using var app = new App();
             app.Run();
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is App app &&
-                   EqualityComparer<Texture2D>.Default.Equals(Pixel, app.Pixel);
         }
     }
 }
