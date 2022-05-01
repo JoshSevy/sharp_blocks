@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Blocks.Constants;
@@ -7,6 +8,9 @@ namespace Blocks
     public class PlayScene
     {
         private Engine engine;
+        private double baseDelay;
+        private double curDelay;
+        private double elapsed;
 
         private readonly Color[] palatte = new Color[]
         {
@@ -22,9 +26,15 @@ namespace Blocks
 
         private void Reset()
         {
+            baseDelay = NORMAL_DELAY;
+            curDelay = baseDelay;
             engine = new();
-
             engine.Spawn();
+            engine.GameOver = () =>
+            {
+                Console.WriteLine("Game Over");
+            };
+            engine.Down();
         }
 
         public void Playscene()
@@ -50,6 +60,16 @@ namespace Blocks
                     var v = engine.Board[r, c];
                     spriteBatch.Draw(App.Instance.Pixel, rc, palatte[v]);
                 }
+            }
+        }
+
+        public void Update(double dt)
+        {
+            elapsed += dt;
+            if (elapsed >= curDelay)
+            {
+                elapsed = 0;
+                engine.Down();
             }
         }
     }
