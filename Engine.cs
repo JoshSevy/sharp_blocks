@@ -25,5 +25,27 @@ namespace Blocks
             curPiece = PIECES[which].Cloned;
         }
 
+        private Action gameOver = () => { };
+        public Action GameOver
+        {
+            set => gameOver = value;
+        }
+
+        public void Down()
+        {
+            var clone = board.Cloned;
+            clone.Remove(curPiece, curRow, curCol);
+            if (clone.CanPlace(curPiece, curRow + 1, curCol))
+            {
+                curRow++;
+                clone.Place(curPiece, curRow, curCol);
+                board = clone;
+            }
+            else
+            {
+                gameOver();
+            }
+        }
+
     }
 }

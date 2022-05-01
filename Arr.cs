@@ -82,6 +82,21 @@ namespace Blocks
         {
             get => new(buf, rows);
         }
+
+        public void Remove(Arr piece, int r, int c)
+        {
+            for (int y = 0; y < piece.Rows; y++)
+            {
+                for (int x = 0; x < piece.Cols; x++)
+                {
+                    if (piece[y, x] != 0)
+                    {
+                        this[r + y, c + x] = 0;
+                    }
+                }
+            }
+
+        }
     }
 
 }
