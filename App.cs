@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static Blocks.Constants;
 
 namespace Blocks
 {
@@ -9,6 +10,7 @@ namespace Blocks
     {
         private readonly GraphicsDeviceManager graphics;
         private Texture2D  pixel;
+        private RenderTarget2D target;
 
         public Texture2D Pixel
         {
@@ -20,9 +22,24 @@ namespace Blocks
         protected override void Initialize()
         {
             base.Initialize();
+            graphics.PreferredBackBufferHeight = WINDOW_HEIGHT;
+            graphics.PreferredBackBufferWidth = WINDOW_WIDTH;
+            graphics.ApplyChanges();
+            Window.Title = "Blocks";
+            Window.AllowUserResizing = true;
             pixel = new Texture2D(GraphicsDevice, 1, 1);
             pixel.SetData<Color>(new[] { Color.White });
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            target = new RenderTarget2D(
+                GraphicsDevice,
+                VIRTUAL_WIDTH,
+                VIRTUAL_HEIGHT,
+                false,
+                SurfaceFormat.Color,
+                DepthFormat.None, GraphicsDevice.PresentationParameters.MultiSampleCount,
+                RenderTargetUsage.DiscardContents
+                );
             
         }
 
@@ -42,11 +59,16 @@ namespace Blocks
 
         protected override void Draw(GameTime gameTime)
         {
+            graphics.GraphicsDevice.SetRenderTarget(target);
             GraphicsDevice.Clear(Color.DimGray);
             spriteBatch.Begin();
             scene.Render(spriteBatch);
             spriteBatch.End();
-            
+            graphics.GraphicsDevice.SetRenderTargets(null);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque);
+            var dst = new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height);
+            spriteBatch.Draw(target, dst, Color.White);
+            spriteBatch.End();
         }
 
         public static void Main()
