@@ -36,6 +36,8 @@ namespace Blocks
             get => board;
         }
 
+        // Spawns next random piece
+        // if not gameover
         public void Spawn()
         {
             int which = rnd.Next(PIECES.Length);
@@ -49,6 +51,7 @@ namespace Blocks
             }
         }
 
+        // Moves pieces down screen
         public void Down()
         {
             var clone = board.Cloned;
@@ -68,6 +71,7 @@ namespace Blocks
             }
         }
 
+        // Engine Move Piece Right
         public void Right()
         {
             var clone = board.Cloned;
@@ -80,6 +84,7 @@ namespace Blocks
             }
         }
 
+        // Engine Move Piece Left
         public void Left()
         {
             var clone = board.Cloned;
@@ -92,6 +97,9 @@ namespace Blocks
             }
         }
 
+        // Engine Rotate method
+        // Can replace RotatedCounterClockWise to RotatedClockWise
+        // If you prefer that rotation
         public void Rotate()
         {
             var clone = board.Cloned;

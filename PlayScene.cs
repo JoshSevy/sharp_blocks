@@ -133,6 +133,7 @@ namespace Blocks
             score += scoreMultiplier[removed] * (level + 1);
         }
 
+        // Starts fresh game
         public void Enter(SceneManager manage, object _)
         {
             sceneManager = manage;
@@ -141,9 +142,6 @@ namespace Blocks
             Reset();
         }
 
-        public void Leave()
-        {
-
-        }
+        public void Leave() {}
     }
 }
